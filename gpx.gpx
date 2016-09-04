@@ -1,0 +1,15 @@
+<gpx xmlns="http://www.topografix.com/GPX/1/1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd"
+    version="1.1"
+    creator="WEb-mate">
+    
+    <wpt lat="40.936043" lon="24.413408">
+        
+        <time>11.39</time>
+        
+        <name>Kavala</name>
+        
+    </wpt>
+    
+</gpx>
