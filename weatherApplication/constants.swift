@@ -10,4 +10,4 @@ import Foundation
 
 let URL_BASE = "https://api.forecast.io/forecast/"
 let API_KEY = "340be547b1debd0c9266a06f6fb69217/"
-typealias DownloadComplete = (lat: Double, long :Double) -> ()
+typealias DownloadComplete = () -> ()
