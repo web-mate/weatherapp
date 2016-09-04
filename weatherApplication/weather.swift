@@ -47,7 +47,23 @@ class Weather {
     
     
     // we use as property weather for init the city name
+    
+    var time: String{
+        if _time == nil{
+            _time = ""
+        }
+        return _time
+    }
+    var date: String{
+        if _date == nil{
+            _date = ""
+        }
+        return _date
+    }
     var city : String {
+        if _city == nil{
+            _city = ""
+        }
         return _city
     }
     var latitude : Double {
@@ -56,27 +72,214 @@ class Weather {
     var longitude : Double {
         return _longitude
     }
+    var weatherImg : String {
+        if _weatherImg == nil{
+            _weatherImg = ""
+        }
+        return _weatherImg
+    }
+    var celcious : String {
+        if _celcius == nil{
+            _celcius = ""
+        }
+        return  _celcius
+    }
+    var wind : String{
+        if _wind == nil{
+            _wind = ""
+        }
+        return  _wind
+    }
+    var firstWeatherImg: String{
+        if _firstWeatherImg == nil{
+            _firstWeatherImg = ""
+        }
+        return _firstWeatherImg
+    }
+    var firstTime: String{
+        if _firstTime == nil {
+            _firstTime = ""
+        }
+        return _firstTime
+    }
+    var firstCelcius: String {
+        if _firstCelcius == nil{
+            _firstCelcius = ""
+        }
+        
+        return _firstCelcius
+    }
+    var secondWeatherImg : String {
+        if _secondWeatherImg == nil{
+            _secondWeatherImg = ""
+        }
+        return _secondWeatherImg
+    }
+    var secondTime : String {
+        if _secondTime == nil{
+            _secondTime = ""
+        }
+        return _secondTime
+    }
+    var secondCelcius : String{
+        if _secondCelcius == nil{
+            _secondCelcius = ""
+        }
+        return _secondCelcius
+    }
+    var thirdWeatherImg: String{
+        if _thirdWeatherImg == nil{
+            _thirdWeatherImg = ""
+        }
+        return _thirdWeatherImg
+    }
+    var thirDay: String{
+        if _thirdDay == nil{
+            _thirdDay = ""
+        }
+        return _thirdDay
+    }
+    var thirdHighTemp: String{
+        if _thirdHighTemp == nil {
+            _thirdHighTemp = ""
+        }
+        return _thirdHighTemp
+    }
+    var  thirdLowTemp : String{
+        if _thirdLowTemp == nil{
+            _thirdLowTemp = ""
+        }
+     return _thirdLowTemp
+    }
+    var fourthWeatherImg: String{
+        if _fourthWeatherImg == nil {
+            _fourthWeatherImg = ""
+        }
+        return _fourthWeatherImg
+    }
+    var fourthDay: String{
+        if _fourthDay == nil{
+            _fourthDay = ""
+        }
+        return _fourthDay
+    }
+    var fourthHighTemp: String{
+        if _fourthHighTemp == nil{
+            _fourthHighTemp = ""
+        }
+        return _fourthHighTemp
+    }
+    var fourthLowTemp :String{
+        if _fourthLowTemp == nil{
+            _fourthLowTemp = ""
+        }
+        return _fourthLowTemp
+    }
+    var fifthWeatherImg:String{
+        if _fifthWeatherImg == nil {
+            _fifthWeatherImg = ""
+        }
+        return _fifthWeatherImg
+    }
+    var fifthDay : String{
+        if _fifthDay == nil{
+            _fifthDay = ""
+        }
+        return _fifthDay
+    }
+    var fifthHighTemp : String{
+        if _fifthHighTemp == nil{
+            _fifthHighTemp = ""
+        }
+        return _fifthDay
+    }
+    var fifthLowTemp: String{
+        if _fifthLowTemp == nil {
+            _fifthLowTemp = ""
+        }
+        return _fifthLowTemp
+    }
+    
+    
     
     init (city : String, latitude: Double , longitude: Double ){
         self._city = city
         self._latitude = latitude
         self._longitude = longitude
         
-       
+    }
+    
+    
+    //get the day of week
+    func getDayOfWeekString(today:String)->Int? {
+        let formatter  = NSDateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        if let todayDate = formatter.dateFromString(today) {
+            let myCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+            let myComponents = myCalendar.components(.Weekday, fromDate: todayDate)
+            let weekDay = myComponents.weekday
+                            return weekDay
+            }
+         else {
+            return nil
+        }
+    }
+    
+    
+    //get the name of the day
+    func getDayName(day:Int) -> String? {
+        if day == 1{
+            return "Sunday"
+        }else if day == 2{
+            return "Monday"
+        }else if day == 3 {
+            return "Tuesday"
+        }else if day == 4 {
+            return "Wednesday"
+        }else if day == 5 {
+            return "Thursday"
+        }else if day == 6 {
+            return "Friday"
+        }else if day == 7{
+            return "Saturday"
+        }else {
+            return nil
+        }
         
     }
     
+    //get current date and next days
     func set_current_date() {
         var monthText = ""
         var dayText = ""
+        let thirDay:Int
+        let fourDay:Int
+        let fifth:Int
         let date = NSDate()
         let calendar = NSCalendar.currentCalendar()
         let components = calendar.components([.Day , .Month , .Year], fromDate: date)
         
-        
+        let year = components.year
         let month = components.month
         let day = components.day
-        
+        let allYear = String(year)
+        let allMonth = String(month)
+        let allDay = String(day)
+        let allTimeText = allYear+"-"+allMonth+"-"+allDay
+       getDayOfWeekString(allTimeText)
+       thirDay = day + 1
+       fourDay = day + 2
+       fifth = day + 3
+        if let third = getDayName(thirDay){
+         self._thirdDay = third
+        }
+        if let four = getDayName(fourDay){
+            self._fourthDay = four
+        }
+        if let fift = getDayName(fifth){
+            self._fifthDay = fift
+        }
+      
         if month == 1 {
             monthText = "Jan"
         }else if month == 2{
@@ -108,6 +311,8 @@ class Weather {
         self._date = dayText+" "+monthText
       
     }
+    
+    //get current time
     func set_current_Time(){
       
         let date = NSDate()
@@ -173,12 +378,38 @@ class Weather {
                 }//end hourly
                 if let daily = dict["daily"] as? Dictionary<String, AnyObject> {
                     if let data = daily["data"] as? [Dictionary<String,AnyObject>]{
-                        if let icon = data[0]["icon"] as? String{
+                        //first day
+                        if let icon = data[1]["icon"] as? String{
                             self._thirdWeatherImg = icon
                         }
-                        if let tempmin = data[0]["temperatureMin"] as? Int {
+                        if let tempmin = data[1]["temperatureMin"] as? Int {
                             self._thirdLowTemp = String(tempmin)
                         }
+                        if let tempHigh = data[1]["temperatureMax"] as? Int {
+                            self._thirdHighTemp = String(tempHigh)
+                        }
+                        //second day
+                        if let icon = data[2]["icon"] as? String{
+                            self._fourthWeatherImg = icon
+                        }
+                        if let tempmin = data[2]["temperatureMin"] as? Int {
+                            self._fourthLowTemp = String(tempmin)
+                        }
+                        if let tempHigh = data[2]["temperatureMax"] as? Int {
+                            self._fourthHighTemp = String(tempHigh)
+                        }
+                        //third day
+                        if let icon = data[3]["icon"] as? String{
+                            self._fifthWeatherImg = icon
+                        }
+                        if let tempmin = data[3]["temperatureMin"] as? Int {
+                            self._fifthLowTemp = String(tempmin)
+                        }
+                        if let tempHigh = data[3]["temperatureMax"] as? Int {
+                            self._fifthHighTemp = String(tempHigh)
+                        }
+                        
+                        
                         
                     }
                     
@@ -188,13 +419,13 @@ class Weather {
                 
             }//end dictionary
             
-            
-        }//end downloadweather func
+            completed()
+        }//end  alamofire func
        
         
         
         
-    }
+    }//end downloadweahter fuc
     
     
     
