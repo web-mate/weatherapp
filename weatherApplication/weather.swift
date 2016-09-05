@@ -191,7 +191,7 @@ class Weather {
         if _fifthHighTemp == nil{
             _fifthHighTemp = ""
         }
-        return _fifthDay
+        return _fifthHighTemp
     }
     var fifthLowTemp: String{
         if _fifthLowTemp == nil {
@@ -218,6 +218,7 @@ class Weather {
             let myCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
             let myComponents = myCalendar.components(.Weekday, fromDate: todayDate)
             let weekDay = myComponents.weekday
+            print(weekDay)
                             return weekDay
             }
          else {
@@ -266,19 +267,22 @@ class Weather {
         let allMonth = String(month)
         let allDay = String(day)
         let allTimeText = allYear+"-"+allMonth+"-"+allDay
-       getDayOfWeekString(allTimeText)
-       thirDay = day + 1
-       fourDay = day + 2
-       fifth = day + 3
-        if let third = getDayName(thirDay){
-         self._thirdDay = third
+       let daynex = getDayOfWeekString(allTimeText)
+        if let dayne = daynex{
+       thirDay = dayne + 1
+       fourDay = dayne + 2
+       fifth = dayne + 3
+            if let third = getDayName(thirDay){
+                self._thirdDay = third
+            }
+            if let four = getDayName(fourDay){
+                self._fourthDay = four
+            }
+            if let fift = getDayName(fifth){
+                self._fifthDay = fift
+            }
         }
-        if let four = getDayName(fourDay){
-            self._fourthDay = four
-        }
-        if let fift = getDayName(fifth){
-            self._fifthDay = fift
-        }
+        
       
         if month == 1 {
             monthText = "Jan"
@@ -319,9 +323,20 @@ class Weather {
         let calender = NSCalendar.currentCalendar()
         let components = calender.components([.Hour, .Minute], fromDate: date)
         let hour = String(components.hour)
-        let minute = String(components.minute)
-        let firstHour = components.hour + 4
-        let secondHour = components.hour + 12
+        var minute = String(components.minute)
+        if minute.characters.count == 1{
+            minute = "0"+minute
+        }
+        
+        var firstHour = components.hour + 4
+        if firstHour >= 24{
+            firstHour = firstHour - 24
+        }
+        
+        var secondHour = components.hour + 12
+        if secondHour >= 24{
+            secondHour = secondHour - 24
+        }
         self._time = hour+":"+minute
         self._firstTime = String(firstHour)+":00"
         self._secondTime = String(secondHour)+":00"
@@ -349,8 +364,8 @@ class Weather {
                     if let windSpeed = currently["windSpeed"] as? Int{
                         self._wind = String(windSpeed)
                     }
-                    if let temperature = currently["temperature"] as? Int{
-                        self._celcius = String(temperature)
+                    if let temperature = currently["temperature"] as? Double{
+                                                self._celcius = self.convertFarhToCel(temperature)
                     }
                     
                     
@@ -366,11 +381,12 @@ class Weather {
                             self._secondWeatherImg = icon
                             
                         }
-                        if let temperature = data[4]["temperature"] as? Int{
-                            self._firstCelcius = String(temperature)
+                        if let temperature = data[4]["temperature"] as? Double{
+                            self._firstCelcius =  self.convertFarhToCel(temperature)
                         }
-                        if let temperature = data[12]["temperature"] as? Int{
-                            self._secondTime = String(temperature)
+                        if let temperature = data[12]["temperature"] as? Double{
+                            self._secondCelcius =  self.convertFarhToCel(temperature)
+                            
                         }
 
                     }
@@ -382,31 +398,31 @@ class Weather {
                         if let icon = data[1]["icon"] as? String{
                             self._thirdWeatherImg = icon
                         }
-                        if let tempmin = data[1]["temperatureMin"] as? Int {
-                            self._thirdLowTemp = String(tempmin)
+                        if let tempmin = data[1]["temperatureMin"] as? Double {
+                            self._thirdLowTemp = self.convertFarhToCel(tempmin)
                         }
-                        if let tempHigh = data[1]["temperatureMax"] as? Int {
-                            self._thirdHighTemp = String(tempHigh)
+                        if let tempHigh = data[1]["temperatureMax"] as? Double {
+                            self._thirdHighTemp =  self.convertFarhToCel(tempHigh)
                         }
                         //second day
                         if let icon = data[2]["icon"] as? String{
                             self._fourthWeatherImg = icon
                         }
-                        if let tempmin = data[2]["temperatureMin"] as? Int {
-                            self._fourthLowTemp = String(tempmin)
+                        if let tempmin = data[2]["temperatureMin"] as? Double {
+                            self._fourthLowTemp = self.convertFarhToCel(tempmin)
                         }
-                        if let tempHigh = data[2]["temperatureMax"] as? Int {
-                            self._fourthHighTemp = String(tempHigh)
+                        if let tempHigh = data[2]["temperatureMax"] as? Double {
+                            self._fourthHighTemp = self.convertFarhToCel(tempHigh)
                         }
                         //third day
                         if let icon = data[3]["icon"] as? String{
                             self._fifthWeatherImg = icon
                         }
-                        if let tempmin = data[3]["temperatureMin"] as? Int {
-                            self._fifthLowTemp = String(tempmin)
+                        if let tempmin = data[3]["temperatureMin"] as? Double {
+                            self._fifthLowTemp = self.convertFarhToCel(tempmin)
                         }
-                        if let tempHigh = data[3]["temperatureMax"] as? Int {
-                            self._fifthHighTemp = String(tempHigh)
+                        if let tempHigh = data[3]["temperatureMax"] as? Double {
+                            self._fifthHighTemp = self.convertFarhToCel(tempHigh)
                         }
                         
                         
@@ -427,6 +443,11 @@ class Weather {
         
     }//end downloadweahter fuc
     
+    func convertFarhToCel(temp:Double)-> String {
+      var temperature = temp
+       temperature = round((temperature - 32.0) * (5.0/9.0))
+        return String(temperature)
+    }
     
     
 }
