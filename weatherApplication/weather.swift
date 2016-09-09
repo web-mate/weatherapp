@@ -243,7 +243,13 @@ class Weather {
             return "Friday"
         }else if day == 7{
             return "Saturday"
-        }else {
+        }else if day == 8 {
+             return "Sunday"
+        }else if day == 9{
+            return "Monday"
+        }else if day == 10{
+            return "Tuesday"
+        }else{
             return nil
         }
         

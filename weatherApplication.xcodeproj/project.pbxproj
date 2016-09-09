@@ -172,6 +172,7 @@
 				TargetAttributes = {
 					B39BC7ED1D74A29C0082E166 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = UA5UNE9C8X;
 					};
 				};
 			};
@@ -379,6 +380,7 @@
 			baseConfigurationReference = E50EAC1C004A04210F15704F /* Pods-weatherApplication.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = weatherApplication/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = wemate.com.weatherApplication;
@@ -391,6 +393,7 @@
 			baseConfigurationReference = 37CA1E0E6FEFB3C287D960E7 /* Pods-weatherApplication.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = weatherApplication/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = wemate.com.weatherApplication;

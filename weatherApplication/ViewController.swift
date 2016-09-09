@@ -11,7 +11,7 @@ import CoreLocation
 import MapKit
 
 class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
-    
+    var stopAndStartUpdating = true
     var longtitudee :Double?
     var latitudee : Double?
     // from weather model create object kavala that will be changed with current long and lat
@@ -73,15 +73,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            locationManager.startUpdatingLocation()
+             locationManager.startUpdatingLocation()
             
-            
-            
-            
+            var timer = NSTimer.scheduledTimerWithTimeInterval( 10, target: self, selector: "updateLoc", userInfo: nil, repeats: false)
+           var time = NSTimer.scheduledTimerWithTimeInterval( 3600, target: self, selector: "updateLoc", userInfo: nil, repeats: true)
+
         }
     }// end of didviewappear
     
-
+    func updateLoc (){
+        self.locationManager.startUpdatingLocation()
+        stopAndStartUpdating = false
+    }
     
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -128,7 +131,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             ()->() in
             self.updateUI ()
             self.hourOfTime()
+               self.locationManager.stopUpdatingLocation()
+            
         }
+       
+
         
     }//end locationmanager
     
