@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7DF9FE775A08FB7EBA95F4DC /* Pods_weatherApplication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A735805CD9B46BAC7A0D1F6 /* Pods_weatherApplication.framework */; };
+		7DF9FE775A08FB7EBA95F4DC /* Pods_weatherApplication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A735805CD9B46BAC7A0D1F6 /* Pods_weatherApplication.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		B35190B81D76B01E0034312D /* weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35190B71D76B01E0034312D /* weather.swift */; };
 		B39BC7F21D74A29C0082E166 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39BC7F11D74A29C0082E166 /* AppDelegate.swift */; };
 		B39BC7F41D74A29C0082E166 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39BC7F31D74A29C0082E166 /* ViewController.swift */; };
@@ -15,9 +15,9 @@
 		B39BC7F91D74A29C0082E166 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B39BC7F81D74A29C0082E166 /* Assets.xcassets */; };
 		B39BC7FC1D74A29C0082E166 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B39BC7FA1D74A29C0082E166 /* LaunchScreen.storyboard */; };
 		B39BC8071D74AE9E0082E166 /* customLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39BC8061D74AE9E0082E166 /* customLabel.swift */; };
-		B3AFF40C1D76D18100D6DF68 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3AFF40B1D76D18100D6DF68 /* CoreLocation.framework */; };
+		B3AFF40C1D76D18100D6DF68 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3AFF40B1D76D18100D6DF68 /* CoreLocation.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		B3B43B221D774993006BDE49 /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B43B211D774993006BDE49 /* constants.swift */; };
-		B3DEA1811D7977440076FD15 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3DEA1801D7977440076FD15 /* Alamofire.framework */; };
+		B3DEA1811D7977440076FD15 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3DEA1801D7977440076FD15 /* Alamofire.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */

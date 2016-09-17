@@ -17,6 +17,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     // from weather model create object kavala that will be changed with current long and lat
     var weather : Weather!
     var city = ""
+    var overlay : UIView?
     
     //all of our outlets
     
@@ -58,7 +59,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-       
+        overlay = UIView(frame: view.frame)
+        overlay!.backgroundColor = UIColor.whiteColor()
+        overlay!.alpha = 0.8
+        view.addSubview(overlay!)
         
         }
     
@@ -75,8 +79,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
              locationManager.startUpdatingLocation()
             
-            var timer = NSTimer.scheduledTimerWithTimeInterval( 10, target: self, selector: "updateLoc", userInfo: nil, repeats: false)
-           var time = NSTimer.scheduledTimerWithTimeInterval( 3600, target: self, selector: "updateLoc", userInfo: nil, repeats: true)
+            _ = NSTimer.scheduledTimerWithTimeInterval( 10, target: self, selector: #selector(ViewController.updateLoc), userInfo: nil, repeats: false)
+             _ = NSTimer.scheduledTimerWithTimeInterval( 15, target: self,  selector: #selector(ViewController.updateLoc), userInfo: nil, repeats: false)
+           _ = NSTimer.scheduledTimerWithTimeInterval( 3600, target: self, selector: #selector(ViewController.updateLoc), userInfo: nil, repeats: true)
 
         }
     }// end of didviewappear
@@ -132,11 +137,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             self.updateUI ()
             self.hourOfTime()
                self.locationManager.stopUpdatingLocation()
+            self.overlay?.removeFromSuperview()
             
         }
-       
-
-        
     }//end locationmanager
     
     func updateUI () {
@@ -178,11 +181,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             view.backgroundColor = temp
             
         }
-        if weather.weatherImg == "rain" && time < 21{
+        if weather.weatherImg == "rain" && time < 20{
             let temp = UIColor(red: 54/255.0, green: 111/255.0, blue: 144/255.0, alpha: 1.0)
             view.backgroundColor = temp
         }
-        if weather.weatherImg == "rain" && time > 21{
+        if weather.weatherImg == "rain" && time > 20{
            
             let temp = UIColor(red: 69/255.0, green: 18/255.0, blue: 85/255.0, alpha: 1.0)
             view.backgroundColor = temp

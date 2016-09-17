@@ -366,6 +366,7 @@ class Weather {
                 if let currently =  dict["currently"] as? Dictionary<String, AnyObject> {
                     if let icon = currently["icon"] as? String{
                         self._weatherImg = icon
+                       
                     }
                     if let windSpeed = currently["windSpeed"] as? Int{
                         self._wind = String(windSpeed)
